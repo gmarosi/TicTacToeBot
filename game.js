@@ -56,3 +56,14 @@ function checkWin()
         alert(document.getElementById("8").innerHTML + " won!");
     }
 }
+
+function restart()
+{
+    for(i = 0; i < 9; i++)
+    {
+       document.getElementById(i).innerHTML = "";
+       xPositions[i] = 0;
+       oPositions[i] = 0;
+    }
+    xTurn = true;
+}
