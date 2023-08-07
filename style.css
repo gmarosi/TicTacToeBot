@@ -1,0 +1,37 @@
+table {
+    border-style: solid;
+    max-width: 750px;
+    max-height: 750px;
+    min-width: 500px;
+    min-height: 500px;
+    margin: auto;
+}
+
+td {
+    height: 33%;
+    width: 33%;
+    text-align: center;
+    padding: 5px;
+}
+
+.field {
+    background-color: lightgray;
+    border: none;
+    color: black;
+    text-align: center;
+    font-size: xx-large;
+    font-family: sans-serif;
+}
+
+#restart {
+    background-color: lightgray;
+    border: none;
+    margin: 30px auto;
+    padding: 15px auto;
+    max-width: 500px;
+    min-width: 250px;
+    color: black;
+    font-size: large;
+    font-family: sans-serif;
+    display: block;
+}

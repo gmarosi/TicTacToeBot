@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicTacToeBot</title>
     <script src="./game.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" title="style">
 </head>
 <body>
     <table>
         <tr>
-            <td><button type="button" id="0" onclick="move('0')"></button></td>
-            <td><button type="button" id="1" onclick="move('1')"></button></td>
-            <td><button type="button" id="2" onclick="move('2')"></button></td>
+            <td id="0" class="field" onclick="move('0')"></td>
+            <td id="1" class="field" onclick="move('1')"></td>
+            <td id="2" class="field" onclick="move('2')"></td>
         </tr>
         <tr>
-            <td><button type="button" id="3" onclick="move('3')"></button></td>
-            <td><button type="button" id="4" onclick="move('4')"></button></td>
-            <td><button type="button" id="5" onclick="move('5')"></button></td>
+            <td id="3" class="field" onclick="move('3')"></td>
+            <td id="4" class="field" onclick="move('4')"></td>
+            <td id="5" class="field" onclick="move('5')"></td>
         </tr>
         <tr>
-            <td><button type="button" id="6" onclick="move('6')"></button></td>
-            <td><button type="button" id="7" onclick="move('7')"></button></td>
-            <td><button type="button" id="8" onclick="move('8')"></button></td>
+            <td id="6" class="field" onclick="move('6')"></td>
+            <td id="7" class="field" onclick="move('7')"></td>
+            <td id="8" class="field" onclick="move('8')"></td>
         </tr>
     </table>
     <button type="button" id="restart" onclick="restart()">Restart</button>
