@@ -1,9 +1,17 @@
 let xTurn = true;
 const xPositions = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 const oPositions = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let gameOver = false;
+const wins = [0, 0] // x, o
 
 function move(id)
 {
+    if(gameOver)
+    {
+        alert("Game already over, please restart!");
+        return;
+    }
+
     if(document.getElementById(id).innerText != "")
     {
         alert("Illegal move!");
@@ -46,14 +54,34 @@ function checkWin()
     if(mainDiag || sideDiag || columns[1] || rows[1])
     {
         alert(document.getElementById("4").innerHTML + " won!");
+        gameOver = true;
+        scoring(document.getElementById("4").innerHTML);
     }
     else if(columns[0] || rows[0])
     {
         alert(document.getElementById("0").innerHTML + " won!");
+        gameOver = true;
+        scoring(document.getElementById("0").innerHTML);
     }
     else if(columns[2] || rows[2])
     {
         alert(document.getElementById("8").innerHTML + " won!");
+        gameOver = true;
+        scoring(document.getElementById("8").innerHTML);
+    }
+}
+
+function scoring(winner)
+{
+    if(winner == "X")
+    {
+        wins[0]++;
+        document.getElementById("x-score").innerHTML = "X player score: " + wins[0];
+    }
+    else
+    {
+        wins[1]++;
+        document.getElementById("o-score").innerHTML = "O player score: " + wins[1];
     }
 }
 
@@ -66,4 +94,13 @@ function restart()
        oPositions[i] = 0;
     }
     xTurn = true;
+    gameOver = false;
+}
+
+function reset()
+{
+    wins[0] = 0;
+    wins[1] = 0;
+    document.getElementById("x-score").innerHTML = "X player score: 0";
+    document.getElementById("o-score").innerHTML = "O player score: 0";
 }

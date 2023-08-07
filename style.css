@@ -1,3 +1,7 @@
+html {
+    font-family: sans-serif;
+}
+
 table {
     border-style: solid;
     max-width: 750px;
@@ -17,21 +21,51 @@ td {
 .field {
     background-color: lightgray;
     border: none;
-    color: black;
     text-align: center;
     font-size: xx-large;
-    font-family: sans-serif;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+#game {
+    margin: 0 50px;
+}
+
+#scoreboard {
+    margin: 0 50px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.score {
+    font-size: large;
 }
 
 #restart {
     background-color: lightgray;
     border: none;
     margin: 30px auto;
-    padding: 15px auto;
+    padding: 15px;
     max-width: 500px;
     min-width: 250px;
-    color: black;
     font-size: large;
-    font-family: sans-serif;
+    display: block;
+}
+
+#reset {
+    background-color: lightgray;
+    border: none;
+    margin: 30px auto;
+    padding: 15px;
+    width: 75%;
+    font-size: medium;
     display: block;
 }
