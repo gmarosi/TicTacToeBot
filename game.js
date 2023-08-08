@@ -107,11 +107,11 @@ function think(id)
     // Check for own near wins
 
     let checked = false;
-    let o = 0;
-    const emptyFields = new Array();
+    const goodFields = new Array();
     let i = 0;
     while(!checked)
     {
+        let o = 0;
         while(i < 9 && !oPositions[i])
         {
             i++;
@@ -135,21 +135,17 @@ function think(id)
             }
             else
             {
-                emptyFields.push(num);
+                goodFields.push(num);
             }
         }
 
         if(o == 2)
         {
-            move(emptyFields[0]);
+            move(goodFields[goodFields.length-1]);
             return;
         }
 
         o = 0;
-        while(emptyFields.length > 0)
-        {
-            emptyFields.pop();
-        }
         for(num of columnOf(i))
         {
             if(oPositions[num])
@@ -163,22 +159,77 @@ function think(id)
             }
             else
             {
-                emptyFields.push(num);
+                goodFields.push(num);
             }
         }
 
         if(o == 2)
         {
-            move(emptyFields[0]);
+            move(goodFields[goodFields.length-1]);
             return;
         }
 
-        //TODO: check diag
+        // main diagonal
+        if(i % 4 == 0)
+        {
+            o = 0;
+            for(num of [0, 4, 8])
+            {
+                if(oPositions[num])
+                {
+                    o++;
+                }
+                else if(xPositions[num])
+                {
+                    o = 0;
+                    break;
+                }
+                else
+                {
+                    goodFields.push(num);
+                }
+            }
+
+            if(o == 2)
+            {
+                move(goodFields[goodFields.length-1]);
+                return;
+            }
+        }
+
+        // side diagonal
+        if(i % 4 == 2 || i == 4)
+        {
+            o = 0;
+            for(num of [2, 4, 6])
+            {
+                if(oPositions[num])
+                {
+                    o++;
+                }
+                else if(xPositions[num])
+                {
+                    o = 0;
+                    break;
+                }
+                else
+                {
+                    goodFields.push(num);
+                }
+            }
+
+            if(o == 2)
+            {
+                move(goodFields[goodFields.length-1]);
+                return;
+            }
+        }
 
         i++;
     }
 
     // Check if prev move caused near win
+    const emptyFields = new Array();
     let x = 0;
     while(emptyFields.length > 0)
     {
@@ -235,13 +286,100 @@ function think(id)
         return;
     }
 
-    //TODO: check diag
+    if(id % 4 == 0)
+    {
+        x = 0;
+        while(emptyFields.length > 0)
+        {
+            emptyFields.pop();
+        }
+        for(num of [0, 4, 8])
+        {
+            if(xPositions[num])
+            {
+                x++;
+            }
+            else if(oPositions[num])
+            {
+                x = 0;
+                break;
+            }
+            else
+            {
+                emptyFields.push(num);
+            }
+        }
+
+        if(x == 2)
+        {
+            move(emptyFields[0]);
+            return;
+        }
+    }
+
+    if(id % 4 == 2 || id == 4)
+    {
+        x = 0;
+        while(emptyFields.length > 0)
+        {
+            emptyFields.pop();
+        }
+        for(num of [2, 4, 6])
+        {
+            if(xPositions[num])
+            {
+                x++;
+            }
+            else if(oPositions[num])
+            {
+                x = 0;
+                break;
+            }
+            else
+            {
+                emptyFields.push(num);
+            }
+        }
+
+        if(x == 2)
+        {
+            move(emptyFields[0]);
+            return;
+        }
+    }
+
+    // Place in row or column of existing own field
+    if(goodFields.length > 0)
+    {
+        move(goodFields[0]);
+        return;
+    }
 
     // If possible, place center
     if(!xPositions[4] && !oPositions[4])
     {
         move(4);
         return;
+    }
+
+    // Place in corner field otherwise
+    for(i of [0, 2, 6, 8])
+    {
+        if(!xPositions[i] && !oPositions[i])
+        {
+            move(i);
+            return;
+        }
+    }
+
+    // Place in any field left
+    for(i of [1, 3, 5, 7])
+    {
+        if(!xPositions[i] && !oPositions[i])
+        {
+            move(i);
+            return;
+        }
     }
 }
 
