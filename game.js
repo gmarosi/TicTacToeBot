@@ -348,9 +348,17 @@ function think(id)
         }
     }
 
-    // Place in row or column of existing own field
+    // Place in row or column of existing own field (corner if possible)
     if(goodFields.length > 0)
     {
+        for(let i = 0; i < goodFields.length; i++)
+        {
+            if(goodFields[i] % 2 == 0 && goodFields[i] != 4)
+            {
+                move(goodFields[i]);
+                return;
+            }
+        }
         move(goodFields[0]);
         return;
     }
